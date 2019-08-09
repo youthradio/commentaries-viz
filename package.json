@@ -8,8 +8,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "generate": "nuxt generate && rm -rf _site/* && cp -R dist/ _site/"
   },
   "dependencies": {
     "nuxt": "^2.0.0"
