@@ -1,9 +1,16 @@
+import path from 'path'
+import fs from 'fs'
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 
 export default {
   mode: 'universal',
   /*
   ** Headers of the page
   */
+
+  router: {
+    base: '/commentaries-viz/'
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -52,6 +59,12 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, process.env.SSLKEY)),
+      cert: fs.readFileSync(path.resolve(__dirname, process.env.SSLCRT))
     }
   }
 }
