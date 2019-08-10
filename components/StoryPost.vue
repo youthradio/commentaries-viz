@@ -6,7 +6,11 @@
     @mouseleave="toggle('pause')"
   >
     <div class="box">
-      <img :src="postData.featured_image" class="img-fluid z-image">
+      <img
+        :src="postData.featured_image"
+        :onload="$emit('resetLayout')"
+        class="img-fluid z-image"
+      >
       <div class="title">
         <h3 v-html="postData.title" />
       </div>
@@ -72,6 +76,7 @@ h3{
 .img-box{
   max-height: calc(100vh/6);
 }
+
 </style>
 
 <script>
@@ -89,9 +94,6 @@ export default {
     return {
       test: 'TEST'
     }
-  },
-  computed: {
-
   },
   methods: {
     toggle (mode) {

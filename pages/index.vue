@@ -6,7 +6,10 @@
       class="item"
     >
       <a :href="post.link" target="_blanket">
-        <StoryPost :post-data="post" />
+        <StoryPost
+          :post-data="post"
+          @resetLayout="resetLayout"
+        />
       </a>
     </div>
   </div>
@@ -43,10 +46,14 @@ export default {
     }
 
   },
+  created () {
+  },
   mounted () {
-    this.fetchData(31).then(() => {
-      this.startMuuri()
-    })
+    this.fetchData(31)
+      .then(this.$nextTick)
+      .then(() => {
+        this.startMuuri()
+      })
   },
   methods: {
     async fetchData (perPage) {
@@ -69,6 +76,10 @@ export default {
         layoutDuration: 0
 
       })
+    },
+    resetLayout () {
+      console.log('RESET')
+      // this.grid.refreshItems().layout()
     }
   }
 }
