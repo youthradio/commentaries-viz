@@ -8,8 +8,8 @@
     <div class="box">
       <img
         :src="postData.featured_image"
-        :onload="$emit('resetLayout')"
         class="img-fluid z-image"
+        @load="$emit('imageLoaded')"
       >
       <div class="title">
         <h3 v-html="postData.title" />
@@ -30,6 +30,9 @@
 <style lang="scss" scoped>
 .box{
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .title {
   position: absolute;
@@ -43,12 +46,18 @@
   z-index: 0;
 }
 h3{
-  font-size:  1em;
-  margin: 0.5em;
+  font-size:  0.9em;
+  margin: 0.3em;
 }
 .post-container {
   position: relative;
-  width: calc(100vw/5);
+  width: calc(100vw/2);
+  @media screen and (min-width: 450px){
+      width: calc(100vw/3);
+  }
+    @media screen and (min-width: 650px){
+      width: calc(100vw/4);
+  }
 }
  .post-container-layer {
     content: "";

@@ -8,7 +8,7 @@
       <a :href="post.link" target="_blanket">
         <StoryPost
           :post-data="post"
-          @resetLayout="resetLayout"
+          @imageLoaded="imageLoaded"
         />
       </a>
     </div>
@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       postsDataRaw: [],
-      grid: null
+      grid: null,
+      totalImagesLoaded: 0
     }
   },
   computed: {
@@ -77,9 +78,11 @@ export default {
 
       })
     },
-    resetLayout () {
-      console.log('RESET')
-      // this.grid.refreshItems().layout()
+    imageLoaded () {
+      this.totalImagesLoaded++
+      if (this.grid) {
+        this.grid.refreshItems().layout()
+      }
     }
   }
 }
